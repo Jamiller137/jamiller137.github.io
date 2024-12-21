@@ -2,7 +2,7 @@
 # Start Base Url
 # https://github.com/uiowa-mgb/personal-site-template/wiki/Base-Url
 ################################################################################
-baseURL: "jacobmill.org"
+baseURL: "https://jacobmill.org"
 ################################################################################
 # End Base Url
 ################################################################################
@@ -48,9 +48,9 @@ params:
       disableExperience: false
       disableEducation: false
       disableProjects: true
-      disableAchievements: false
+      disableAchievements: true
       disableTalks: false
-      disableTeaching: false
+      disableTeaching: true
       disableContact: true
       main:
         - identifier: Publications
@@ -81,7 +81,7 @@ params:
 ################################################################################
   theme:
     disableThemeToggle: false
-    defaultTheme: "light" # dark
+    defaultTheme: "dark" # light
 
 
   # color preference
