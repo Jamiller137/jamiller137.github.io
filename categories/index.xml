@@ -2,9 +2,9 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Jacob Miller</title>
-    <link>jacobmill.org/categories/</link>
+    <link>https://jacobmill.org/categories/</link>
     <description>Recent content in Categories on Jacob Miller</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="jacobmill.org/categories/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language><atom:link href="https://jacobmill.org/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

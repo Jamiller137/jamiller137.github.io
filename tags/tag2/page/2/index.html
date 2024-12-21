@@ -31,7 +31,7 @@
 <meta property="og:title" content="tag2" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="jacobmill.org/tags/tag2/" />
+<meta property="og:url" content="https://jacobmill.org/tags/tag2/" />
 
 
 <meta name="twitter:card" content="summary"/>
@@ -162,7 +162,7 @@ tag2 | Jacob Miller
     <nav class="pt-3 navbar navbar-expand-lg animate">
         <div class="container-fluid mx-xs-2 mx-sm-5 mx-md-5 mx-lg-5">
             
-            <a class="navbar-brand primary-font text-wrap" href="/jacobmill.org">
+            <a class="navbar-brand primary-font text-wrap" href="/">
                 
                 <img src="/icons/favicon.ico" width="30" height="30"
                     class="d-inline-block align-top">
@@ -198,7 +198,7 @@ tag2 | Jacob Miller
 
                     
                     <li class="nav-item navbar-text">
-                        <a class="nav-link" href="/jacobmill.org#about" aria-label="about">
+                        <a class="nav-link" href="/#about" aria-label="about">
                             About Me
                         </a>
                     </li>
@@ -206,7 +206,7 @@ tag2 | Jacob Miller
 
                     
                     <li class="nav-item navbar-text">
-                        <a class="nav-link" href="/jacobmill.org#education"
+                        <a class="nav-link" href="/#education"
                             aria-label="education">
                             Education
                         </a>
@@ -215,7 +215,7 @@ tag2 | Jacob Miller
 
                     
                     <li class="nav-item navbar-text">
-                        <a class="nav-link" href="/jacobmill.org#experience"
+                        <a class="nav-link" href="/#experience"
                             aria-label="experience">
                             Experience
                         </a>
@@ -226,7 +226,7 @@ tag2 | Jacob Miller
 
                     
                     <li class="nav-item navbar-text">
-                        <a class="nav-link" href="/jacobmill.org#talks"
+                        <a class="nav-link" href="/#talks"
                             aria-label="talks">
                             Talks
                         </a>
@@ -234,23 +234,9 @@ tag2 | Jacob Miller
                     
 
                     
-                    <li class="nav-item navbar-text">
-                        <a class="nav-link" href="/jacobmill.org#teaching"
-                            aria-label="talks">
-                            Teaching
-                        </a>
-                    </li>
-                    
 
                     
 
-                    
-                    <li class="nav-item navbar-text">
-                        <a class="nav-link" href="/jacobmill.org#achievements"
-                            aria-label="achievements">
-                            Awards
-                        </a>
-                    </li>
                     
 
                     
@@ -331,7 +317,7 @@ tag2 | Jacob Miller
                 <div class="card h-100">
                     
                     <div class="card-body bg-transparent p-4 shadow-sm">
-                        <a href="jacobmill.org/publications/talk2/" class="primary-font card-title">
+                        <a href="/publications/talk2/" class="primary-font card-title">
                             <h5 class="card-title bg-transparent" title="Proin ac purus venenatis, volutpat lorem non, rutrum lacus">Proin ac purus venenatis, …</h5>
                         </a>
                         <div class="card-text secondary-font">
@@ -340,7 +326,7 @@ tag2 | Jacob Miller
                     </div>
                     <div class="mt-auto post-footer bg-transparent py-3">
                         <span class="float-start bg-transparent">Nov 8, 2022</span>
-                        <a href="jacobmill.org/publications/talk2/" class="float-end btn btn-outline-info btn-sm">Read</a>
+                        <a href="/publications/talk2/" class="float-end btn btn-outline-info btn-sm">Read</a>
                     </div>
                 </div>
             </div>
@@ -351,13 +337,13 @@ tag2 | Jacob Miller
                 
     <ul class="pagination pagination-default">
       <li class="page-item">
-        <a href="jacobmill.org/tags/tag2/" aria-label="First" class="page-link" role="button"><span aria-hidden="true">&laquo;&laquo;</span></a>
+        <a href="/tags/tag2/" aria-label="First" class="page-link" role="button"><span aria-hidden="true">&laquo;&laquo;</span></a>
       </li>
       <li class="page-item">
-        <a href="jacobmill.org/tags/tag2/" aria-label="Previous" class="page-link" role="button"><span aria-hidden="true">&laquo;</span></a>
+        <a href="/tags/tag2/" aria-label="Previous" class="page-link" role="button"><span aria-hidden="true">&laquo;</span></a>
       </li>
       <li class="page-item">
-        <a href="jacobmill.org/tags/tag2/" aria-label="Page 1" class="page-link" role="button">1</a>
+        <a href="/tags/tag2/" aria-label="Page 1" class="page-link" role="button">1</a>
       </li>
       <li class="page-item active">
         <a aria-current="page" aria-label="Page 2" class="page-link" role="button">2</a>
@@ -401,7 +387,7 @@ tag2 | Jacob Miller
     <div class="row justify-content-center">
         <div class="col-md-4 text-center">
             <div class="pb-2">
-                <a href="jacobmill.org" title="Jacob Miller">
+                <a href="https://jacobmill.org" title="Jacob Miller">
                     <img alt="Footer logo" src="/icons/favicon.ico"
                         height="40px" width="40px">
                 </a>
@@ -422,13 +408,11 @@ tag2 | Jacob Miller
     </div>
 </div></footer><script src="/bootstrap-5/js/bootstrap.bundle.min.js"></script>
 <script>
-    if (document.body.className.includes("dark")) {
-        document.body.classList.remove('dark');
-        localStorage.setItem("pref-theme", 'light');
+    if (document.body.className.includes("light")) {
+        document.body.classList.add('dark');
+        localStorage.setItem("pref-theme", 'dark');
     }
 </script>
-
-
 <script>
     document.getElementById("theme-toggle").addEventListener("click", () => {
         if (document.body.className.includes("dark")) {
