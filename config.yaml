@@ -113,7 +113,7 @@ params:
 ################################################################################
   hero:
     enable: true
-    intro: "Hi, my name is"
+    intro: "Hi welcome to my website!"
     title: "Jacob Miller"
     subtitle: ""
     content: ""
@@ -149,18 +149,18 @@ params:
     title: "About Me"
     # image: "/images/Pythagoras.jpeg"
     content: |-
-        In dolor dolor, eleifend at leo a, viverra convallis risus. Aliquam eu leo
-        diam. Vivamus at urna dignissim, venenatis dolor ut, laoreet elit.
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        I am currently a 3rd Year PhD student in mathematics at the 
+        University of Iowa under Professor Isabel Darcy.
     skills:
       enable: true
       title: "Here are some of my research interests:"
       items:
-        - "Triangles"
-        - "Circles"
-        - "Squares"
-        - "Points"
-        - "Angles"
+        - "Topological Data Analysis"
+        - "Vertices"
+        - "Edges"
+        - "Faces"
+        - "Tetrahedra"
+        - "Mapper"
 
 
 ################################################################################
@@ -173,7 +173,7 @@ params:
 ################################################################################
   education:
     enable: true
-    # title: "Custom Name"
+    # title: "EdUcaTiOn"
     index: false
     items:
       - title: "tellus sit amet pulvinar"
