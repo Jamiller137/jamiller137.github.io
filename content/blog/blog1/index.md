@@ -1,26 +1,132 @@
 ---
-title: 'In et turpis nec ex laoreet'
-date: 2022-11-08
-draft: false
+title: 'Implementing a Dev Branch'
+date: 2025-4-19
+draft: true
 github_link: "https://github.com/gurusabarish/hugo-profile"
-author: "Gurusabarish"
+author: "Jacob Miller"
 tags:
-  - tag1
-  - tag2
-  - tag3
-image: /images/pythagoras.jpeg
-description: ""
-toc:
+  - Git Repository
+  - Organization
+  - Workflow
+description: "A breakdown of a common repository workflow."
 ---
+I was recently asked to write up a proposal for a repository workflow. The 
+result is in no way original but is a simplification of some of the branching
+strategies found in 
+[this article.](https://medium.com/novai-devops-101/top-4-branching-strategies-and-their-comparison-a-guide-with-recommendations-21071e1c472a)
+
+## Common GitHub Workflow Problems
+
+Many GitHub repositories have a simple workflow where contributors create
+feature branches directly off `main` and eventually merge back into it. 
+This is a nice solution for small or proof-of-concept projects where stable 
+production level code is not life or death. However, as the code-base and
+contributor size grows this strategy has challenges:
+
+- **Stability risks**: Direct merges to `main` can and will introduce bugs to
+production code
+- **Integration issues**: Feature changes tested in isolation may conflict when 
+combined
+- **Contributor friction**: External contributors without write permissions
+must fork, which creates a disjointed development experience over time
+- **Unclear progression**: Without intermediate stages, the path from 
+contribution to production is not clear
+
+## The Dev Branch Solution
+
+A dedicated dev branch creates a middle ground between initial development and 
+production-ready code. Here's how this one simple trick can drastically 
+improve one's workflow:
+
+### Branch Structure
+`feature branches` -> `dev` -> `main`
+
+This creates a clear progression which quarantines unstable in-progress work 
+from production code.
+
+### Why This Works
+
+- **Protected Production Environment**: The `main` branch remains stable with
+an additional verification layer
+- **Integration Testing**: The `dev` branch serves as a place to catch
+conflicts between features
+- **Cleaner Collaboration**: Work stays centralized rather than scattered 
+across multiple forks
+- **Contributor Progression**: Contributors can see a structured path to 
+gaining increased project responsibility
+
+These are extremely applicable for my current use case since academic software 
+tends to have a consistent revolving door of contributors with varying levels
+of experience/expertise.
+
+## Implementing This Workflow
+
+### For Core Team Members
+
+1. Create feature branches from the dev branch:
+   ```bash
+   git switch dev
+   git pull    # Keep dev updated
+   git switch -c feature-name    # New branch based on dev
+   ```
+2. Develop and test your changes locally.
+3. Push the feature branch to the repository:
+    ```bash
+    git push origin feature-name
+    ```
+4. Open a pull request to the `dev` branch (not `main`)... never touch `main`.
+5. After review, repository administrators can merge a stable `dev` branch to
+`main`.
+
+### For External Contributors
+
+People who aren't a part of the organization still have the option to fork the 
+repository and submit pull requests as usual. The workflow for these
+contributors should be similar:
+1. Fork repository
+2. Create a feature branch on their fork
+3. Submit a pull request from the feature to the `dev` branch
+
+### Branch Protection
+To gain the benefits of this setup it is advisable to have the following
+protection settings/policies:
+
+#### Main Branch:
+
+- Require code review approval before merging
+- Restrict merge permissions solely to administrators
+- Disable direct pushes (can only PR from `dev` to `main`)
+- Require all tests and checks pass
+
+#### Dev Branch:
+- Disable direct pushes except in emergencies
+    - All changes to `dev` should really be coming through PRs from 
+    feature branches.
+- Require tests and checks to pass
+- Require review from an administrator or maintainer
+
+### Permissions
+
+This structure inherently creates a progression of responsibilty/trust:
+- **Administrators**: Full repository control, are primarily responsible for
+  `dev` -> `main` merges and can do basically anything they need to
+- **Maintainers**: can approve PRs to `dev`, manage issues, can give preliminary
+  code reviews
+- **Developers**: Can create feature branches inside of the organization repository
+  without the need to fork
+- **Contributor**: Not a part of the organization or are required to fork and
+  submit PRs from their feature branches to `dev`
+
+This creates a natural advancement path:
+1. New contributors start by forking and submitting PRs
+2. After quality contributions, grant them direct repository access
+3. As trust builds, they can become maintainers with review privileges
+4. Eventually, trusted maintainers might become administrators
+
+*"The Wheel of Time turns, and Ages come and pass, leaving memories that become
+legend."*
 
 
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer faucibus ligula vitae vulputate malesuada. Nunc interdum dapibus vestibulum. Phasellus pretium mauris id ex varius vulputate vel maximus odio. Proin tempus malesuada ligula commodo semper. Phasellus enim metus, tincidunt eget odio eu, pellentesque tempus magna. Nullam commodo scelerisque dolor quis luctus. Praesent tempus vel odio vel dapibus.
 
-Aliquam vitae dolor nec mi auctor dictum eget nec velit. Mauris vestibulum egestas nisl, id eleifend orci facilisis in. Phasellus at ligula laoreet sapien suscipit iaculis. Sed sed massa orci. In et turpis nec ex laoreet consequat a at risus. Quisque commodo massa enim, suscipit molestie odio facilisis eget. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In porta semper purus egestas tristique. Maecenas ultrices nibh eget diam mattis, sagittis placerat purus tristique. Nulla vitae dolor nisi. Suspendisse at hendrerit dolor. Morbi in lectus tortor. Duis ultricies hendrerit purus, quis sagittis dolor dapibus ut. Mauris arcu nulla, pretium a bibendum eget, tincidunt molestie quam.
 
-Vestibulum eleifend consectetur diam non malesuada. Curabitur sed pretium odio, vitae rutrum massa. Integer id dolor magna. Morbi porttitor tellus leo, ut porta purus sagittis eu. Nunc lacinia pharetra finibus. Maecenas sit amet fringilla enim. Cras tempor nibh massa, auctor dictum purus hendrerit ut. Nullam bibendum nisi id malesuada fringilla.
-
-Aliquam erat volutpat. Fusce ornare iaculis odio, et lacinia mi congue a. Etiam vitae blandit diam, vel elementum ante. Duis nec dapibus elit. Nam imperdiet enim euismod ligula condimentum tempus. Nullam aliquam semper libero vitae vulputate. Pellentesque eget dignissim ex.
-
-Aliquam odio nisl, porta id mattis vitae, accumsan ut arcu. Aliquam vitae ipsum vel est rhoncus condimentum. Cras interdum et tortor vitae consectetur. Cras iaculis odio porta, tincidunt mauris in, consectetur tellus. Aenean viverra at tellus id tincidunt. Sed condimentum nisi ante, in ultricies turpis dapibus vitae. Fusce iaculis convallis ligula sed imperdiet. Morbi eleifend tempus maximus. Duis luctus lectus ut augue vehicula congue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nullam vel aliquam mauris. Donec dapibus vulputate erat a pellentesque.
