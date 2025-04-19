@@ -1,7 +1,7 @@
 ---
 title: 'Implementing a Dev Branch'
 date: 2025-4-19
-draft: true
+draft: false
 github_link: "https://github.com/gurusabarish/hugo-profile"
 author: "Jacob Miller"
 tags:
