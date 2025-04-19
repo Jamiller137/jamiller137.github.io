@@ -44,5 +44,15 @@ A pdf PreviousNextPreviousNext&amp;nbsp;&amp;nbsp;Page: / Some text Pellen
       <description></description>
     </item>
     
+    <item>
+      <title>Implementing a Dev Branch</title>
+      <link>https://jacobmill.org/blog/blog1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://jacobmill.org/blog/blog1/</guid>
+      <description>I was recently asked to write up a proposal for a repository workflow. The result is in no way original but is a simplification of some of the branching strategies found in this article.
+Common GitHub Workflow Problems Many GitHub repositories have a simple workflow where contributors create feature branches directly off main and eventually merge back into it. This is a nice solution for small or proof-of-concept projects where stable production level code is not life or death.</description>
+    </item>
+    
   </channel>
 </rss>

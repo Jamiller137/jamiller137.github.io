@@ -28,15 +28,17 @@
 
 
 
-<meta property="og:title" content="Tags" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://jacobmill.org/tags/" />
+<meta property="og:title" content="Implementing a Dev Branch" />
+<meta property="og:description" content="A breakdown of a common repository workflow." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jacobmill.org/blog/blog1/" /><meta property="article:section" content="blog" />
+
+
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Tags"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:title" content="Implementing a Dev Branch"/>
+<meta name="twitter:description" content="A breakdown of a common repository workflow."/>
 
 
 <link rel="stylesheet" href="/bootstrap-5/css/bootstrap.min.css" media="all"><link rel="stylesheet" href="/css/header.css" media="all">
@@ -99,11 +101,14 @@
     }
 </style>
 
-<meta name="description" content="Tags of Jacob Miller">
-<link rel="stylesheet" href="/css/list.css" media="all">
+<meta name="description" content="A breakdown of a common repository workflow.">
+<link rel="stylesheet" href="/css/single.css">
+
+
+<script defer src="/fontawesome-6/all-6.4.2.js"></script>
 
   <title>
-Tags | Jacob Miller
+Implementing a Dev Branch | Jacob Miller
 
   </title>
 </head>
@@ -308,97 +313,269 @@ Tags | Jacob Miller
     </nav>
 </header>
 <div id="content">
-<div class="container pt-5" id="list-page">
-    <h2 class="text-center pb-2">Tags</h2>
-    <div class="row">
-        
-        <div class="col-lg-4 col-md-6 my-3">
-            <div class="card-columns">
-                <div class="card h-100">
-                    
-                    <div class="card-body bg-transparent p-4 shadow-sm">
-                        <a href="/tags/tag1/" class="primary-font card-title">
-                            <h5 class="card-title bg-transparent" title="tag1">tag1</h5>
-                        </a>
-                        <div class="card-text secondary-font">
-                            <p></p>
-                        </div>
-                    </div>
-                    <div class="mt-auto post-footer bg-transparent py-3">
-                        <span class="float-start bg-transparent">Jan 8, 2023</span>
-                        <a href="/tags/tag1/" class="float-end btn btn-outline-info btn-sm">Read</a>
-                    </div>
-                </div>
+<section id="single">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-sm-12 col-md-12 col-lg-9">
+        <div class="pr-lg-4">
+          <div class="title mb-5">
+            <h1 class="text-center mb-4">Implementing a Dev Branch</h1>
+            <div class="text-center">
+              Jacob Miller
+              <small>|</small>
+              Jan 1, 0001
+
+              
+              <span id="readingTime">
+                min read
+              </span>
+              
             </div>
+          </div>
+          
+          <article class="page-content  p-2">
+          <p>I was recently asked to write up a proposal for a repository workflow. The
+result is in no way original but is a simplification of some of the branching
+strategies found in
+<a href="https://medium.com/novai-devops-101/top-4-branching-strategies-and-their-comparison-a-guide-with-recommendations-21071e1c472a">this article.</a></p>
+<h2 id="common-github-workflow-problems">Common GitHub Workflow Problems</h2>
+<p>Many GitHub repositories have a simple workflow where contributors create
+feature branches directly off <code>main</code> and eventually merge back into it.
+This is a nice solution for small or proof-of-concept projects where stable
+production level code is not life or death. However, as the code-base and
+contributor size grows this strategy has challenges:</p>
+<ul>
+<li><strong>Stability risks</strong>: Direct merges to <code>main</code> can and will introduce bugs to
+production code</li>
+<li><strong>Integration issues</strong>: Feature changes tested in isolation may conflict when
+combined</li>
+<li><strong>Contributor friction</strong>: External contributors without write permissions
+must fork, which creates a disjointed development experience over time</li>
+<li><strong>Unclear progression</strong>: Without intermediate stages, the path from
+contribution to production is not clear</li>
+</ul>
+<h2 id="the-dev-branch-solution">The Dev Branch Solution</h2>
+<p>A dedicated dev branch creates a middle ground between initial development and
+production-ready code. Here&rsquo;s how this one simple trick can drastically
+improve one&rsquo;s workflow:</p>
+<h3 id="branch-structure">Branch Structure</h3>
+<p><code>feature branches</code> -&gt; <code>dev</code> -&gt; <code>main</code></p>
+<p>This creates a clear progression which quarantines unstable in-progress work
+from production code.</p>
+<h3 id="why-this-works">Why This Works</h3>
+<ul>
+<li><strong>Protected Production Environment</strong>: The <code>main</code> branch remains stable with
+an additional verification layer</li>
+<li><strong>Integration Testing</strong>: The <code>dev</code> branch serves as a place to catch
+conflicts between features</li>
+<li><strong>Cleaner Collaboration</strong>: Work stays centralized rather than scattered
+across multiple forks</li>
+<li><strong>Contributor Progression</strong>: Contributors can see a structured path to
+gaining increased project responsibility</li>
+</ul>
+<p>These are extremely applicable for my current use case since academic software
+tends to have a consistent revolving door of contributors with varying levels
+of experience/expertise.</p>
+<h2 id="implementing-this-workflow">Implementing This Workflow</h2>
+<h3 id="for-core-team-members">For Core Team Members</h3>
+<ol>
+<li>Create feature branches from the dev branch:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git switch dev
+</span></span><span style="display:flex;"><span>git pull    <span style="color:#75715e"># Keep dev updated</span>
+</span></span><span style="display:flex;"><span>git switch -c feature-name    <span style="color:#75715e"># New branch based on dev</span>
+</span></span></code></pre></div></li>
+<li>Develop and test your changes locally.</li>
+<li>Push the feature branch to the repository:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git push origin feature-name
+</span></span></code></pre></div></li>
+<li>Open a pull request to the <code>dev</code> branch (not <code>main</code>)&hellip; never touch <code>main</code>.</li>
+<li>After review, repository administrators can merge a stable <code>dev</code> branch to
+<code>main</code>.</li>
+</ol>
+<h3 id="for-external-contributors">For External Contributors</h3>
+<p>People who aren&rsquo;t a part of the organization still have the option to fork the
+repository and submit pull requests as usual. The workflow for these
+contributors should be similar:</p>
+<ol>
+<li>Fork repository</li>
+<li>Create a feature branch on their fork</li>
+<li>Submit a pull request from the feature to the <code>dev</code> branch</li>
+</ol>
+<h3 id="branch-protection">Branch Protection</h3>
+<p>To gain the benefits of this setup it is advisable to have the following
+protection settings/policies:</p>
+<h4 id="main-branch">Main Branch:</h4>
+<ul>
+<li>Require code review approval before merging</li>
+<li>Restrict merge permissions solely to administrators</li>
+<li>Disable direct pushes (can only PR from <code>dev</code> to <code>main</code>)</li>
+<li>Require all tests and checks pass</li>
+</ul>
+<h4 id="dev-branch">Dev Branch:</h4>
+<ul>
+<li>Disable direct pushes except in emergencies
+<ul>
+<li>All changes to <code>dev</code> should really be coming through PRs from
+feature branches.</li>
+</ul>
+</li>
+<li>Require tests and checks to pass</li>
+<li>Require review from an administrator or maintainer</li>
+</ul>
+<h3 id="permissions">Permissions</h3>
+<p>This structure inherently creates a progression of responsibilty/trust:</p>
+<ul>
+<li><strong>Administrators</strong>: Full repository control, are primarily responsible for
+<code>dev</code> -&gt; <code>main</code> merges and can do basically anything they need to</li>
+<li><strong>Maintainers</strong>: can approve PRs to <code>dev</code>, manage issues, can give preliminary
+code reviews</li>
+<li><strong>Developers</strong>: Can create feature branches inside of the organization repository
+without the need to fork</li>
+<li><strong>Contributor</strong>: Not a part of the organization or are required to fork and
+submit PRs from their feature branches to <code>dev</code></li>
+</ul>
+<p>This creates a natural advancement path:</p>
+<ol>
+<li>New contributors start by forking and submitting PRs</li>
+<li>After quality contributions, grant them direct repository access</li>
+<li>As trust builds, they can become maintainers with review privileges</li>
+<li>Eventually, trusted maintainers might become administrators</li>
+</ol>
+<p><em>&ldquo;The Wheel of Time turns, and Ages come and pass, leaving memories that become
+legend.&rdquo;</em></p>
+
+          </article>
         </div>
-        
-        <div class="col-lg-4 col-md-6 my-3">
-            <div class="card-columns">
-                <div class="card h-100">
-                    
-                    <div class="card-body bg-transparent p-4 shadow-sm">
-                        <a href="/tags/tag2/" class="primary-font card-title">
-                            <h5 class="card-title bg-transparent" title="tag2">tag2</h5>
-                        </a>
-                        <div class="card-text secondary-font">
-                            <p></p>
-                        </div>
-                    </div>
-                    <div class="mt-auto post-footer bg-transparent py-3">
-                        <span class="float-start bg-transparent">Jan 8, 2023</span>
-                        <a href="/tags/tag2/" class="float-end btn btn-outline-info btn-sm">Read</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-lg-4 col-md-6 my-3">
-            <div class="card-columns">
-                <div class="card h-100">
-                    
-                    <div class="card-body bg-transparent p-4 shadow-sm">
-                        <a href="/tags/tag3/" class="primary-font card-title">
-                            <h5 class="card-title bg-transparent" title="tag3">tag3</h5>
-                        </a>
-                        <div class="card-text secondary-font">
-                            <p></p>
-                        </div>
-                    </div>
-                    <div class="mt-auto post-footer bg-transparent py-3">
-                        <span class="float-start bg-transparent">Jan 8, 2023</span>
-                        <a href="/tags/tag3/" class="float-end btn btn-outline-info btn-sm">Read</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="row justify-content-center">
-            <div class="col-auto m-3">
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-3">
+        <div id="stickySideBar" class="sticky-sidebar">
+          
+          <aside class="toc">
+              <h5>
+                Table Of Contents
+              </h5>
+              <div class="toc-content">
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#common-github-workflow-problems">Common GitHub Workflow Problems</a></li>
+    <li><a href="#the-dev-branch-solution">The Dev Branch Solution</a>
+      <ul>
+        <li><a href="#branch-structure">Branch Structure</a></li>
+        <li><a href="#why-this-works">Why This Works</a></li>
+      </ul>
+    </li>
+    <li><a href="#implementing-this-workflow">Implementing This Workflow</a>
+      <ul>
+        <li><a href="#for-core-team-members">For Core Team Members</a></li>
+        <li><a href="#for-external-contributors">For External Contributors</a></li>
+        <li><a href="#branch-protection">Branch Protection</a></li>
+        <li><a href="#permissions">Permissions</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+              </div>
+          </aside>
+          
+
+          
+          <aside class="tags">
+            <h5>Tags</h5>
+            <ul class="tags-ul list-unstyled list-inline">
+              
+              <li class="list-inline-item"><a href="https://jacobmill.org/tags/git-repository" target="_blank">Git Repository</a></li>
+              
+              <li class="list-inline-item"><a href="https://jacobmill.org/tags/organization" target="_blank">Organization</a></li>
+              
+              <li class="list-inline-item"><a href="https://jacobmill.org/tags/workflow" target="_blank">Workflow</a></li>
+              
+            </ul>
+          </aside>
+          
+
+          
+          <aside class="social">
+            <h5>Social</h5>
+            <div class="social-content">
+              <ul class="list-inline">
                 
-    <ul class="pagination pagination-default">
-      <li class="page-item disabled">
-        <a aria-disabled="true" aria-label="First" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&laquo;&laquo;</span></a>
-      </li>
-      <li class="page-item disabled">
-        <a aria-disabled="true" aria-label="Previous" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&laquo;</span></a>
-      </li>
-      <li class="page-item active">
-        <a aria-current="page" aria-label="Page 1" class="page-link" role="button">1</a>
-      </li>
-      <li class="page-item">
-        <a href="/tags/page/2/" aria-label="Page 2" class="page-link" role="button">2</a>
-      </li>
-      <li class="page-item">
-        <a href="/tags/page/2/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
-      </li>
-      <li class="page-item">
-        <a href="/tags/page/2/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
-      </li>
-    </ul>
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href="https://example.com">
+                    <i class="fab fa-github "></i>
+                  </a>
+                </li>
+                
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href="https://example.com">
+                    <i class="fab fa-linkedin "></i>
+                  </a>
+                </li>
+                
+                
+                <li class="list-inline-item text-center">
+                    <a href="https://example.com" target="_blank" class="img-icon">
+                        <img src="/images/DNA.png">
+                    </a>
+                </li>
+                
+              </ul>
             </div>
+          </aside>
+          
         </div>
+      </div>
     </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-9 p-4">
+        
+      </div>
+    </div>
+  </div>
+  <button class="p-2 px-3" onclick="topFunction()" id="topScroll">
+    <i class="fas fa-angle-up"></i>
+  </button>
+</section>
+
+
+<div class="progress">
+  <div id="scroll-progress-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
+<Script src="/js/scrollProgressBar.js"></script>
+
+
+<script>
+  var topScroll = document.getElementById("topScroll");
+  window.onscroll = function() {scrollFunction()};
+
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      topScroll.style.display = "block";
+    } else {
+      topScroll.style.display = "none";
+    }
+  }
+
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+
+  
+  let stickySideBarElem = document.getElementById("stickySideBar");
+  let stickyNavBar =  true ;
+  if(stickyNavBar) {
+    let headerElem = document.getElementById("profileHeader");
+    let headerHeight = headerElem.offsetHeight + 15;
+    stickySideBarElem.style.top = headerHeight + "px";
+  } else {
+    stickySideBarElem.style.top = "50px";
+  }
+</script>
+
+
+<script src="/js/readingTime.js"></script>
+
+
 
   </div><footer>
 
