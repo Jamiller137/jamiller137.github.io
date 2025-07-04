@@ -20,15 +20,16 @@
             nodePackages.prettier
             nodePackages.eslint
 
-            # Static site generator
+            # Static site generators
             # hugo
 
+            # Version control and deployment
             git
             gh
           ];
 
           shellHook = ''
-            echo "Jacob Miller's website dev environment loaded!"
+            echo "Personal website dev environment loaded!"
             echo "Available commands:"
             echo "  live-server src/    - Start local dev server"
             echo "  prettier --write .  - Format code"
