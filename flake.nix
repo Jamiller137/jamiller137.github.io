@@ -16,12 +16,13 @@
           buildInputs = with pkgs; [
             # Web development tools
             nodejs_24
-            nodePackages.live-server
+            nodePackages.npm
+            nodePackages.yarn
+            nodePackages.pnpm
+
             nodePackages.prettier
             nodePackages.eslint
-
-            # Static site generators
-            # hugo
+            nodePackages.typescript
 
             # Version control and deployment
             git
@@ -29,14 +30,22 @@
           ];
 
           shellHook = ''
-            echo "Personal website dev environment loaded!"
+            echo "⚛️  React website dev environment loaded!"
             echo "Available commands:"
-            echo "  live-server src/    - Start local dev server"
-            echo "  prettier --write .  - Format code"
-            echo "  eslint src/         - Lint JavaScript"
+            echo "  npm install         - Install dependencies"
+            echo "  npm run dev         - Start development server"
+            echo "  npm run build       - Build for production"
+            echo "  npm run preview     - Preview production build"
+            echo "  npm run lint        - Lint code"
+            echo "  npm run format      - Format code with Prettier"
             echo ""
+
+            # Set up npm if package.json doesn't exist
+            if [ ! -f package.json ]; then
+              echo "📦 Setting up React project..."
+              npm create vite@latest . -- --template react
+            fi
           '';
         };
       });
 }
-
